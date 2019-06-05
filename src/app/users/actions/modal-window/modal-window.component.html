@@ -1,0 +1,39 @@
+<button (click)="openModal(myModal)" class="btn btn-primary">
+  New
+</button>
+<ng-template #myModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ modalAttributes.title }}</h4>
+    <button type="button" class="close pull-right" aria-label="close" (click)="modalRef.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f='ngForm' (ngSubmit)='onSubmit()' class='form-group'>
+      <div class="form-group">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" placeholder="First name"
+        [(ngModel)]="newUser.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="surnameInput">Surname:</label>
+        <input type="text" id="surnameInput" placeholder="Surname"
+        [(ngModel)]="newUser.surname" name="surname">
+      </div>
+      <div class="form-group">
+        <label for="emailInput">Email:</label>
+        <input type="text" id="emailInput" placeholder="email@example.com"
+        [(ngModel)]="newUser.mail" name="mail">
+      </div>
+      <div class="form-group">
+        <label for="ageInput">Age:</label>
+        <input type="text" id="ageInput" placeholder="0"
+        [(ngModel)]="newUser.age" name="age">
+      </div>
+      <div class="field">
+        <button type="submit" [ngClass]="['btn', modalAttributes.btnClass]">
+          {{ modalAttributes.btnCaption }}</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

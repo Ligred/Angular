@@ -1,0 +1,18 @@
+
+  <div>{{user.name}}</div>
+  <div>{{user.surname}}</div>
+  <div>{{user.mail}}</div>
+  <div>{{user.age}}</div>
+  <div class="field">
+    <button class="btn btn-warning btn-xs" (click)="onClickUpdate($event, user)">
+      <div style='text-align:center;'><i class="fa fa-edit"></i></div>
+    </button>
+    <button class="btn btn-danger ml-1" (click)='deleteUser(user)'>
+      <div style='text-align:center;'><i class="fa fa-trash"></i></div>
+    </button>
+    <!-- <button class="btn btn-warning btn-xs" (click)="onClickUpdate($event, user)">
+      <div style='text-align:center;'><i class="fa fa-edit"></i></div>
+    </button> -->
+  </div>
+  
+

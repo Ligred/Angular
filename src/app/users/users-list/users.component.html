@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Users list</h2>
+  <app-modal-window #userActions></app-modal-window>
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-row justify-content-between  my-2">
+      <div>Firstname</div>
+      <div>Surname</div>
+      <div>Email</div>
+      <div>Age</div>
+      <div>Actions</div>
+    </div>
+    <app-user class="d-flex flex-row justify-content-between my-1"  
+    *ngFor="let user of users" [user]='user' 
+    (clickEditUser)="userActions.openModalUpdate($event)"></app-user>
+  </div>
+</div>
