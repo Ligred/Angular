@@ -4,35 +4,133 @@
 <ng-template #myModal>
   <div class="modal-header">
     <h4 class="modal-title pull-left">{{ modalAttributes.title }}</h4>
-    <button type="button" class="close pull-right" aria-label="close" (click)="modalRef.close()">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="close"
+      (click)="modalRef.close()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form #f='ngForm' (ngSubmit)='onSubmit()' class='form-group'>
+    <form #f="ngForm" (ngSubmit)="onSubmit()" class="form-group">
       <div class="form-group">
         <label for="nameInput">Name:</label>
-        <input type="text" id="nameInput" placeholder="First name"
-        [(ngModel)]="newUser.name" name="name">
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="First name"
+          required
+          minlength="3"
+          maxlength="15"
+          #name="ngModel"
+          [(ngModel)]="newUser.name"
+          name="name"
+        />
+        <div
+          *ngIf="name.errors && (name.dirty || name.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!name.errors.required">
+            Required
+          </div>
+          <div [hidden]="!name.errors.minlength">
+            At least 3 characters
+          </div>
+          <div [hidden]="!name.errors.maxlength">
+            Not more than 15 characters
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="surnameInput">Surname:</label>
-        <input type="text" id="surnameInput" placeholder="Surname"
-        [(ngModel)]="newUser.surname" name="surname">
+        <input
+          type="text"
+          id="surnameInput"
+          placeholder="Surname"
+          required
+          minlength="3"
+          maxlength="20"
+          #surname="ngModel"
+          [(ngModel)]="newUser.surname"
+          name="surname"
+        />
+        <div
+          *ngIf="surname.errors && (surname.dirty || surname.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!surname.errors.required">
+            Required
+          </div>
+          <div [hidden]="!surname.errors.minlength">
+            At least 3 characters
+          </div>
+          <div [hidden]="!surname.errors.maxlength">
+            Not more than 20 characters
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="emailInput">Email:</label>
-        <input type="text" id="emailInput" placeholder="email@example.com"
-        [(ngModel)]="newUser.mail" name="mail">
+        <input
+          type="email"
+          id="emailInput"
+          placeholder="email@example.com"
+          required
+          email
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          [(ngModel)]="newUser.mail"
+          #mail="ngModel"
+          name="mail"
+        />
+        <div
+          *ngIf="mail.errors && (mail.dirty || mail.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!mail.errors.required">
+            Required
+          </div>
+          <div [hidden]="!mail.errors.pattern">
+            Email is wrong!
+          </div>
+          <!-- <div [hidden]="!mail.errors.email">
+            Email is wrong!!!!!!!
+          </div> -->
+        </div>
       </div>
       <div class="form-group">
         <label for="ageInput">Age:</label>
-        <input type="text" id="ageInput" placeholder="0"
-        [(ngModel)]="newUser.age" name="age">
+        <input
+          type="number"
+          id="ageInput"
+          placeholder="0"
+          required
+          appMinNumber="16"
+          [(ngModel)]="newUser.age"
+          name="age"
+          #age="ngModel"
+        />
+        <div
+          *ngIf="age.errors && (age.dirty || age.touched)"
+          class="alert alert-danger"
+        >
+          <div [hidden]="!age.errors.required">
+            Required!
+          </div>
+          <div [hidden]="!age.errors.minNumber">
+            Age less than 16!
+          </div>
+        </div>
       </div>
       <div class="field">
-        <button type="submit" [ngClass]="['btn', modalAttributes.btnClass]">
-          {{ modalAttributes.btnCaption }}</button>
+        <button
+          type="submit"
+          [ngClass]="['btn', modalAttributes.btnClass]"
+          [disabled]="!f.form.valid"
+        >
+          {{ modalAttributes.btnCaption }}
+        </button>
       </div>
     </form>
   </div>

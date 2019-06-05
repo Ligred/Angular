@@ -4,10 +4,12 @@ import { FormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { MinNumberDirective } from './min-number.directive';
 
 @NgModule({
   declarations: [
-    ModalWindowComponent
+    ModalWindowComponent,
+    MinNumberDirective
   ],
   imports: [
     CommonModule,
