@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UsersService } from '../users.service';
 
 
@@ -8,7 +8,7 @@ import { UsersService } from '../users.service';
   styleUrls: ['./users.component.css'],
   providers: [UsersService]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
   public users: any;
   constructor(private userService: UsersService) { }
 
@@ -17,7 +17,11 @@ export class UsersComponent implements OnInit {
     this.userService.getObsrveble().subscribe(users => this.users = users);
   }
 
-  getUsers() {
+  ngOnDestroy(): void {
+    this.userService.getObsrveble().unsubscribe();
+  }
+
+  getUsers(): void {
     this.userService.get().then(users => this.users = users);
   }
 }

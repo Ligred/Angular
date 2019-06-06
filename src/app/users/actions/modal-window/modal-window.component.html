@@ -106,7 +106,7 @@
           id="ageInput"
           placeholder="0"
           required
-          appMinNumber="16"
+          appMinNumber="0"
           [(ngModel)]="newUser.age"
           name="age"
           #age="ngModel"
@@ -119,7 +119,7 @@
             Required!
           </div>
           <div [hidden]="!age.errors.minNumber">
-            Age less than 16!
+            Age less than 0!
           </div>
         </div>
       </div>
