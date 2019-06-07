@@ -8,9 +8,9 @@ let users = [
   {name: 'User4', surname: 'User-4', mail: 'some4@mail.com', age: '26', id: 4}
 ];
 
-Injectable({
+@Injectable({
   providedIn: 'root'
-});
+})
 export class UsersService {
   public subject = new Subject<any>();
 

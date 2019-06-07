@@ -14,7 +14,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form #f="ngForm" (ngSubmit)="onSubmit()" class="form-group">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-group">
       <div class="form-group">
         <label for="nameInput">Name:</label>
         <input
@@ -22,23 +22,20 @@
           id="nameInput"
           placeholder="First name"
           required
-          minlength="3"
-          maxlength="15"
-          #name="ngModel"
-          [(ngModel)]="newUser.name"
+          formControlName="name"
           name="name"
         />
         <div
           *ngIf="name.errors && (name.dirty || name.touched)"
           class="alert alert-danger"
         >
-          <div [hidden]="!name.errors.required">
+          <div *ngIf="name.errors.required">
             Required
           </div>
-          <div [hidden]="!name.errors.minlength">
+          <div *ngIf="name.errors.minlength">
             At least 3 characters
           </div>
-          <div [hidden]="!name.errors.maxlength">
+          <div *ngIf="name.errors.maxlength">
             Not more than 15 characters
           </div>
         </div>
@@ -50,24 +47,21 @@
           id="surnameInput"
           placeholder="Surname"
           required
-          minlength="3"
-          maxlength="20"
-          #surname="ngModel"
-          [(ngModel)]="newUser.surname"
+          formControlName="surname"
           name="surname"
         />
         <div
           *ngIf="surname.errors && (surname.dirty || surname.touched)"
           class="alert alert-danger"
         >
-          <div [hidden]="!surname.errors.required">
+          <div *ngIf="surname.errors.required">
             Required
           </div>
-          <div [hidden]="!surname.errors.minlength">
+          <div *ngIf="surname.errors.minlength">
             At least 3 characters
           </div>
-          <div [hidden]="!surname.errors.maxlength">
-            Not more than 20 characters
+          <div *ngIf="surname.errors.maxlength">
+            Not more than 15 characters
           </div>
         </div>
       </div>
@@ -78,25 +72,19 @@
           id="emailInput"
           placeholder="email@example.com"
           required
-          email
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          [(ngModel)]="newUser.mail"
-          #mail="ngModel"
+          formControlName="mail"
           name="mail"
         />
         <div
           *ngIf="mail.errors && (mail.dirty || mail.touched)"
           class="alert alert-danger"
         >
-          <div [hidden]="!mail.errors.required">
+          <div *ngIf="mail.errors.required">
             Required
           </div>
-          <div [hidden]="!mail.errors.pattern">
+          <div *ngIf="mail.errors.pattern">
             Email is wrong!
           </div>
-          <!-- <div [hidden]="!mail.errors.email">
-            Email is wrong!!!!!!!
-          </div> -->
         </div>
       </div>
       <div class="form-group">
@@ -105,21 +93,24 @@
           type="number"
           id="ageInput"
           placeholder="0"
-          required
-          appMinNumber="0"
-          [(ngModel)]="newUser.age"
+          formControlName="age"
           name="age"
-          #age="ngModel"
         />
         <div
           *ngIf="age.errors && (age.dirty || age.touched)"
           class="alert alert-danger"
         >
-          <div [hidden]="!age.errors.required">
+          <div *ngIf="age.errors.required">
             Required!
           </div>
-          <div [hidden]="!age.errors.minNumber">
-            Age less than 0!
+          <div *ngIf="age.errors.minAge">
+            You are too young! Yor age less than 16!!
+          </div>
+          <div *ngIf="age.errors.maxAge">
+            You are too old! Yor age greater than 100!!
+          </div>
+          <div *ngIf="age.errors.isInteger">
+            Number should be ineger!!
           </div>
         </div>
       </div>
@@ -127,7 +118,7 @@
         <button
           type="submit"
           [ngClass]="['btn', modalAttributes.btnClass]"
-          [disabled]="!f.form.valid"
+          [disabled]="userForm.invalid"
         >
           {{ modalAttributes.btnCaption }}
         </button>
