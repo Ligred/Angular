@@ -1,0 +1,6 @@
+<form [formGroup]="filterForm">
+  <input type="text" formControlName="filterInput">
+  <select formControlName="selectKey">
+    <option *ngFor="let key of userField" [ngValue]='key'>{{key}}</option>
+  </select>
+</form>

@@ -1,6 +1,7 @@
 <div class="container">
   <h2>Users list</h2>
   <app-modal-window #userActions></app-modal-window>
+  <app-users-filer #userFiler></app-users-filer>
   <div class="d-flex flex-column">
     <div class="d-flex flex-row justify-content-between  my-2">
       <div>Firstname</div>
@@ -10,7 +11,9 @@
       <div>Actions</div>
     </div>
     <app-user class="d-flex flex-row justify-content-between my-1"  
-    *ngFor="let user of users" [user]='user' 
-    (clickEditUser)="userActions.openModalUpdate($event)"></app-user>
+    *ngFor="let user of (users | usersFilter:userFiler.getFilerData())"
+              [user]='user' (clickEditUser)="userActions.openModalUpdate($event)">
+
+    </app-user>
   </div>
 </div>

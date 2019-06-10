@@ -9,7 +9,8 @@ import { ActionsModule } from './actions/actions.module';
 @NgModule({
   declarations: [
     UsersComponent,
-    UserComponent
+    UserComponent,
+
   ],
   imports: [
     CommonModule,

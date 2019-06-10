@@ -11,7 +11,6 @@ import { UsersService } from '../users.service';
 export class UsersComponent implements OnInit, OnDestroy {
   public users: any;
   constructor(private userService: UsersService) { }
-
   ngOnInit() {
     this.getUsers();
     this.userService.getObsrveble().subscribe(users => this.users = users);
