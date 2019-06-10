@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User} from "../../user";
+import { User} from '../../user';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ export class UsersFilerComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.userField = Object.keys(this.user).filter(i => i !== "id");
+    this.userField = Object.keys(this.user).filter(i => i !== 'id');
     this.filterForm = this.fb.group({
       filterInput: [''],
       selectKey: [this.userField[0]]
@@ -25,7 +25,7 @@ export class UsersFilerComponent implements OnInit {
     return {
       filerInput: this.filterForm.get('filterInput').value,
       selectField: this.filterForm.get('selectKey').value
-    }
+    };
   }
 
 
